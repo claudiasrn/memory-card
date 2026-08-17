@@ -27,6 +27,8 @@ export default function Game() {
 			setClickedIDs(newClickedIDs);
 			setScore(score + 1);
 		}
+
+        setRoundIDs(shuffle(curatedObjectIDs));
 	}
 
 	return (
