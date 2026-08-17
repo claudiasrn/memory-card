@@ -28,14 +28,32 @@ export default function Game() {
 			setScore(score + 1);
 		}
 
-        setRoundIDs(shuffle(curatedObjectIDs));
+		setRoundIDs(shuffle(curatedObjectIDs));
 	}
 
 	return (
-		<div className="game">
-			{roundIDs.map((id) => {
-				return <Card key={id} id={id} handleClick={handleCardClick} />;
-			})}
+		<div className="game-wrapper">
+			<div className="header">
+				<div className="header-text">
+					<h1>Van Gogh memory</h1>
+					<p>click each painting once, don't repeat</p>
+				</div>
+				<div className="header-stats">
+					<div className="stat">
+						<p className="stat-label">Score</p>
+						<p className="stat-value">{score}</p>
+					</div>
+					<div className="stat">
+						<p className="stat-label">Best</p>
+						<p className="stat-value">{bestScore}</p>
+					</div>
+				</div>
+			</div>
+			<div className="game">
+				{roundIDs.map((id) => {
+					return <Card key={id} id={id} handleClick={handleCardClick} />;
+				})}
+			</div>
 		</div>
 	);
 }
