@@ -13,6 +13,7 @@ export default function Game() {
 	const [score, setScore] = useState(0);
 	const [bestScore, setBestScore] = useState(0);
 	const [clickedIDs, setClickedIDs] = useState(() => new Set());
+	const [hasWon, setHasWon] = useState(false);
 
 	function handleCardClick(objectID) {
 		if (clickedIDs.has(objectID)) {
@@ -21,13 +22,26 @@ export default function Game() {
 			}
 			setScore(0);
 			setClickedIDs(new Set());
+			setHasWon(false);
 		} else {
 			const newClickedIDs = new Set(clickedIDs);
 			newClickedIDs.add(objectID);
 			setClickedIDs(newClickedIDs);
 			setScore(score + 1);
+
+			if (newClickedIDs.size === curatedObjectIDs.length) {
+				setHasWon(true);
+			}
 		}
 
+		setRoundIDs(shuffle(curatedObjectIDs));
+	}
+
+	function handleRestart() {
+		setBestScore(score);
+		setScore(0);
+		setClickedIDs(new Set());
+		setHasWon(false);
 		setRoundIDs(shuffle(curatedObjectIDs));
 	}
 
@@ -49,6 +63,20 @@ export default function Game() {
 					</div>
 				</div>
 			</div>
+			{hasWon && (
+				<div className="win-overlay">
+					<div className="win-alert">
+						<p className="win-alert-icon">✦</p>
+						<p className="win-alert-title">Collection complete</p>
+						<p className="win-alert-message">
+							You remembered all 12 paintings
+						</p>
+						<button className="win-alert-button" onClick={handleRestart}>
+							Play again
+						</button>
+					</div>
+				</div>
+			)}
 			<div className="game">
 				{roundIDs.map((id) => {
 					return <Card key={id} id={id} handleClick={handleCardClick} />;
