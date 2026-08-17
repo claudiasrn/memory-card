@@ -1,5 +1,77 @@
+.game-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
 .game {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: center;
+  gap: 20px;
+  max-width: 1700px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 32px;
+  padding: 20px 28px;
+  border-radius: 12px;
+}
+
+.header-text h1 {
+  font-family: Georgia, serif;
+  color: #e8dcc4;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.header-text p {
+  font-size: 1.5rem;
+  color: #a9976f;
+  margin: 4px 0 0;
+  letter-spacing: 0.03em;
+}
+
+.header-stats {
+  display: flex;
+  gap: 28px;
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: #a9976f;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.stat-value {
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  color: #e8dcc4;
+  margin: 2px 0 0;
+}
+
+@media (max-width: 1690px) {
+  .game {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .game {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .game {
+    grid-template-columns: 1fr;
+  }
 }
