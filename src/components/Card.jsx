@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 export default function Card({ id, handleClick }) {
 	const [image, setImage] = useState("");
 	const [title, setTitle] = useState("");
+	const [year, setYear] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
@@ -11,6 +12,7 @@ export default function Card({ id, handleClick }) {
 			const data = await getArtwork(id);
 			setIsLoading(false);
 			setTitle(data.title);
+			setYear(data.year);
 			setImage(data.imageUrl);
 		}
 
@@ -21,6 +23,7 @@ export default function Card({ id, handleClick }) {
 		<div className="card" onClick={() => handleClick(id)}>
 			<img src={image} />
 			<p>{title}</p>
+			<p>Van Gogh, {year}</p>
 		</div>
 	) : (
 		<p>Loading</p>
