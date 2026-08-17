@@ -10,11 +10,29 @@ const curatedObjectIDs = [
 
 export default function Game() {
 	const [roundIDs, setRoundIDs] = useState(() => shuffle(curatedObjectIDs));
+	const [score, setScore] = useState(0);
+	const [bestScore, setBestScore] = useState(0);
+	const [clickedIDs, setClickedIDs] = useState(() => new Set());
+
+	function handleCardClick(objectID) {
+		if (clickedIDs.has(objectID)) {
+			if (bestScore < score) {
+				setBestScore(score);
+			}
+			setScore(0);
+			setClickedIDs(new Set());
+		} else {
+			const newClickedIDs = new Set(clickedIDs);
+			newClickedIDs.add(objectID);
+			setClickedIDs(newClickedIDs);
+			setScore(score + 1);
+		}
+	}
 
 	return (
 		<div className="game">
 			{roundIDs.map((id) => {
-				return <Card key={id} id={id} />;
+				return <Card key={id} id={id} handleClick={handleCardClick} />;
 			})}
 		</div>
 	);
