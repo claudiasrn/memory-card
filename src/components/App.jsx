@@ -1,9 +1,5 @@
-import  Game  from "./Game.jsx";
+import Game from "./Game.jsx";
 
 export default function App() {
-	return (
-		<div className="app">
-			<Game />
-		</div>
-	);
+	return <Game />;
 }
