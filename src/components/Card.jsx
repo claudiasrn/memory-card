@@ -1,5 +1,6 @@
 import getArtwork from "../utils/metApi";
 import { useEffect, useState } from "react";
+import "./Card.css";
 
 export default function Card({ id, handleClick }) {
 	const [image, setImage] = useState("");
@@ -19,13 +20,25 @@ export default function Card({ id, handleClick }) {
 		loadArtwork();
 	}, [id]);
 
-	return !isLoading ? (
-		<div className="card" onClick={() => handleClick(id)}>
-			<img src={image} />
-			<p>{title}</p>
-			<p>Van Gogh, {year}</p>
+	return (
+		<div className="card">
+			<div className="card-image-frame">
+				{isLoading ? (
+					<div className="card-placeholder" />
+				) : (
+					<img src={image} onClick={() => handleClick(id)} />
+				)}
+			</div>
+			<div className="card-plate">
+				{isLoading ? (
+					<p className="title">···</p>
+				) : (
+					<>
+						<p className="title">{title}</p>
+						<p className="year">Van Gogh, {year}</p>
+					</>
+				)}
+			</div>
 		</div>
-	) : (
-		<p>Loading</p>
 	);
 }
