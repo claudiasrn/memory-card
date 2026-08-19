@@ -26,7 +26,9 @@ export default function Card({ id, handleClick }) {
 				{isLoading ? (
 					<div className="card-placeholder" />
 				) : (
-					<img src={image} onClick={() => handleClick(id)} />
+					<button className="card-image-button" onClick={() => handleClick(id)}>
+						<img src={image} alt={title} />
+					</button>
 				)}
 			</div>
 			<div className="card-plate">
